@@ -1,6 +1,6 @@
 - 👋 Hi, I’m Paul
 - 👀 I’m interested in web development and computer science as well as software craftsmanship
-- 🌱 I’m currently learning Vue, PHP, Symfony, Kotlin and Go
+- 🌱 I’m currently working with PHP, Symfony, Laravel, Python and Go
 - 💞️ I’m looking to collaborate on interessting open source projects written in Java or Kotlin
 - 📫 How to reach me? Just message me.
 
