@@ -124,22 +124,68 @@
             margin-right: 10px;
         }
 
-        .gecko-ascii {
-            font-size: 10px;
-            line-height: 8px;
-            color: var(--terminal-green);
-            white-space: pre;
-            margin: 20px 0;
-            text-align: center;
-            display: inline-block;
-            padding: 0 20px;
-        }
-
-        .ascii-container {
-            text-align: center;
+        .pixel-gallery {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
             border-top: 1px dashed var(--terminal-green);
             border-bottom: 1px dashed var(--terminal-green);
-            margin: 20px 0;
+            margin: 24px 0;
+            padding: 18px 0;
+        }
+
+        .pixel-gallery.visible {
+            display: grid;
+        }
+
+        .pixel-canvas {
+            margin: 0;
+            position: relative;
+            border: 1px solid var(--electro-blue);
+            background:
+                radial-gradient(circle at 10% 15%, rgba(0, 243, 255, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 75%, rgba(255, 0, 85, 0.18), transparent 34%),
+                linear-gradient(145deg, rgba(10, 20, 12, 0.95), rgba(8, 12, 20, 0.95));
+            padding: 12px;
+            box-shadow: 0 0 14px rgba(0, 243, 255, 0.25);
+        }
+
+        .pixel-canvas {
+            display: none;
+        }
+
+        .pixel-canvas.visible {
+            display: block;
+        }
+
+        .pixel-canvas::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 12px 12px;
+            mix-blend-mode: screen;
+            opacity: 0.25;
+        }
+
+        .pixel-canvas img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border: 1px solid rgba(224, 224, 224, 0.35);
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .pixel-title {
+            margin: 10px 0 0;
+            font-size: 0.8rem;
+            color: var(--terminal-green);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         .footer {
@@ -170,6 +216,36 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .legal-section {
+            margin-top: 28px;
+            border-top: 1px dashed var(--electro-blue);
+            padding-top: 20px;
+            cursor: pointer;
+        }
+
+        .legal-hint {
+            margin: 0 0 12px;
+            font-size: 0.85rem;
+            color: #9fe8ff;
+        }
+
+        .legal-notice {
+            border: 1px solid var(--electro-blue);
+            background: rgba(0, 25, 35, 0.65);
+            padding: 14px;
+            min-height: 96px;
+            display: none;
+        }
+
+        .legal-canvas {
+            display: block;
+            width: 100%;
+        }
+
+        .legal-section.open .legal-notice {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -196,37 +272,26 @@
                 <span class="interest-icon">🎮</span> GAMING
                 <br><small>Min-maxing reality.</small>
             </div>
-            <div class="stat-box">
+            <div class="stat-box" data-reveal="gecko" tabindex="0" role="button" aria-label="Show gecko pixel art">
                 <span class="interest-icon">🦎</span> GECKOS
                 <br><small>Lizard brain enthusiast.</small>
             </div>
-            <div class="stat-box red-panda-box">
+            <div class="stat-box red-panda-box" data-reveal="redpanda" tabindex="0" role="button" aria-label="Show red panda pixel art">
                 <span class="interest-icon">🐾</span> RED PANDA
                 <br><small>Favorite biological unit.</small>
             </div>
         </div>
     </section>
 
-    <div class="ascii-container">
-        <div class="gecko-ascii">
-     _    _
-    (o)--(o)
-   /        \
-  /  _    _  \
-  | (_)  (_) |
-   \  ____  /
-    \______/  
-    [GECKO.EXE]
-        </div>
-        <div class="gecko-ascii" style="color: var(--punk-pink);">
-     ^  ^
-    (O.O)
-     (vv)
-    /|  |\
-   //|  |\\
-  m  m  m  m
-   [PANDA.SH]
-        </div>
+    <div id="pixel-gallery" class="pixel-gallery" aria-live="polite">
+        <figure class="pixel-canvas" data-animal="gecko">
+            <img src="assets/phelsuma-pixel.avif" alt="Pixel art of a Phelsuma day gecko on a leaf" width="348" height="282" loading="lazy">
+            <figcaption class="pixel-title">PHELSUMA.DAYGECKO</figcaption>
+        </figure>
+        <figure class="pixel-canvas" data-animal="redpanda">
+            <img src="assets/redpanda-pixel.avif" alt="Pixel art of a little red panda in grass" width="372" height="270" loading="lazy">
+            <figcaption class="pixel-title">FIREFOX.REDPANDA</figcaption>
+        </figure>
     </div>
 
     <section>
@@ -236,6 +301,15 @@
             <li><strong>OS:</strong> Linux / Distro-Hopping</li>
             <li><strong>Status:</strong> Overclocking the weekend.</li>
         </ul>
+    </section>
+
+    <section class="legal-section" id="legal-section" tabindex="0" aria-expanded="false">
+        <h3>[ LEGAL_NOTICE ]</h3>
+        <p class="legal-hint">Klicken zum Anzeigen des Impressums.</p>
+        <div class="legal-notice">
+            <canvas id="legal-canvas" class="legal-canvas"></canvas>
+        </div>
+        <noscript>Bitte JavaScript aktivieren, um das Impressum zu sehen.</noscript>
     </section>
 
     <section>
@@ -281,6 +355,155 @@
   // Just a small nerd gimmick: console greeting
   console.log("%c Welcome to the terminal.", "color: #00ff41; font-weight: bold; font-size: 20px;");
   console.log("Everything is fine. Keep clicking.");
+
+  // Obfuscation only raises scraping effort, it cannot guarantee full protection.
+  (function renderLegalNotice() {
+    const lines = [
+      [64, 114, 117, 100, 126, 99, 114],
+      [83, 126, 114, 100, 114, 100, 55, 94, 122, 103, 101, 114, 100, 100, 98, 122, 55, 112, 126, 123, 99, 55, 113, 98, 114, 101, 55, 118, 123, 123, 114, 55, 86, 121, 112, 114, 117, 120, 99, 114, 55, 98, 121, 99, 114, 101, 55, 115, 114, 101, 55, 83, 120, 122, 118, 126, 121, 55, 127, 99, 99, 103, 100, 45, 56, 56, 112, 118, 126, 115, 118, 103, 57, 112, 126, 99, 127, 98, 117, 57, 126, 120, 56, 112, 118, 126, 115, 118, 103, 56, 55, 126, 121, 124, 123, 98, 100, 126, 97, 114, 55, 118, 123, 123, 114, 101, 55, 68, 98, 117, 115, 120, 122, 118, 126, 121, 100, 55, 63, 66, 121, 99, 114, 101, 100, 114, 126, 99, 114, 121, 62, 57],
+      [86, 121, 112, 118, 117, 114, 121, 55, 112, 114, 122, 118, 114, 100, 100, 55, 176, 55, 34, 55, 83, 83, 80],
+      [71, 118, 98, 123, 55, 80, 118, 126, 115, 118],
+      [85, 101, 114, 126, 99, 114, 100, 55, 85, 123, 114, 114, 124, 55, 33, 36],
+      [36, 47, 38, 37, 35, 59, 55, 85, 101, 118, 98, 121, 100, 116, 127, 96, 114, 126, 112],
+      [67, 114, 123, 114, 113, 120, 121, 45, 55, 60, 35, 46, 38, 32, 47, 38, 35, 32, 33, 33, 33, 46],
+      [82, 58, 90, 118, 126, 123, 45, 55, 126, 121, 113, 120, 87, 103, 118, 98, 123, 58, 112, 118, 126, 115, 118, 57, 116, 120, 122]
+    ];
+    const key = 23;
+    const legalSection = document.getElementById("legal-section");
+    const legalCanvas = document.getElementById("legal-canvas");
+
+    const decodedLines = [
+      lines[0],
+      "",
+      lines[1],
+      "",
+      lines[2],
+      "",
+      lines[3],
+      lines[4],
+      lines[5],
+      lines[6],
+      lines[7]
+    ].map((line) => {
+      if (line === "") {
+        return "";
+      }
+      return line.map((charCode) => String.fromCharCode(charCode ^ key)).join("");
+    });
+
+    function renderCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const cssWidth = Math.max(220, legalCanvas.parentElement.clientWidth - 28);
+      const lineHeight = 24;
+      const padding = 10;
+      const font = "17px 'Courier New', Courier, monospace";
+
+      const textProbe = document.createElement("canvas").getContext("2d");
+      if (!textProbe) {
+        return;
+      }
+      textProbe.font = font;
+
+      const maxTextWidth = cssWidth - (padding * 2);
+      const wrappedLines = [];
+
+      decodedLines.forEach((line) => {
+        if (!line) {
+          wrappedLines.push("");
+          return;
+        }
+
+        const words = line.split(" ");
+        let current = words[0] || "";
+
+        for (let i = 1; i < words.length; i += 1) {
+          const candidate = current + " " + words[i];
+          if (textProbe.measureText(candidate).width <= maxTextWidth) {
+            current = candidate;
+          } else {
+            wrappedLines.push(current);
+            current = words[i];
+          }
+        }
+        wrappedLines.push(current);
+      });
+
+      const cssHeight = (wrappedLines.length * lineHeight) + (padding * 2);
+      legalCanvas.width = Math.max(1, Math.floor(cssWidth * dpr));
+      legalCanvas.height = Math.floor(cssHeight * dpr);
+      legalCanvas.style.height = cssHeight + "px";
+
+      const ctx = legalCanvas.getContext("2d");
+      if (!ctx) {
+        return;
+      }
+
+      ctx.scale(dpr, dpr);
+      ctx.clearRect(0, 0, cssWidth, cssHeight);
+      ctx.fillStyle = "#e0e0e0";
+      ctx.font = font;
+      ctx.textBaseline = "top";
+
+      wrappedLines.forEach((line, index) => {
+        ctx.fillText(line, padding, padding + (index * lineHeight));
+      });
+    }
+
+    function toggleLegalSection() {
+      const isOpen = legalSection.classList.toggle("open");
+      legalSection.setAttribute("aria-expanded", String(isOpen));
+      if (isOpen) {
+        // Render after the hidden container becomes visible to avoid stretching.
+        window.requestAnimationFrame(renderCanvas);
+      }
+    }
+
+    window.addEventListener("resize", () => {
+      if (legalSection.classList.contains("open")) {
+        renderCanvas();
+      }
+    });
+
+    legalSection.addEventListener("click", toggleLegalSection);
+    legalSection.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleLegalSection();
+      }
+    });
+
+    const statBoxes = document.querySelectorAll(".stat-box");
+    const pixelGallery = document.getElementById("pixel-gallery");
+    const pixelCanvases = pixelGallery.querySelectorAll(".pixel-canvas");
+
+    function revealPixelArt(targetAnimal) {
+      let hasVisible = false;
+      pixelCanvases.forEach((canvas) => {
+        const matches = canvas.dataset.animal === targetAnimal;
+        canvas.classList.toggle("visible", matches);
+        hasVisible = hasVisible || matches;
+      });
+      pixelGallery.classList.toggle("visible", hasVisible);
+    }
+
+    function onStatActivate(box) {
+      const targetAnimal = box.dataset.reveal;
+      if (!targetAnimal) {
+        return;
+      }
+      revealPixelArt(targetAnimal);
+    }
+
+    statBoxes.forEach((box) => {
+      box.addEventListener("click", () => onStatActivate(box));
+      box.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onStatActivate(box);
+        }
+      });
+    });
+  })();
 </script>
 
 </body>
