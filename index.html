@@ -12,6 +12,9 @@
             --electro-blue: #00f3ff;
             --neon-yellow: #fff200;
             --cyber-purple: #bc13fe;
+            --neon-orange: #ff9f00;
+            --cyber-lime: #ccff00;
+            --neon-mint: #00ff9f;
             --text-color: #e0e0e0;
             --font-mono: 'Courier New', Courier, monospace;
         }
@@ -113,6 +116,9 @@
         .photography-box { --glow-color: var(--electro-blue); }
         .music-box { --glow-color: var(--neon-yellow); }
         .gaming-box { --glow-color: var(--cyber-purple); }
+        .books-box { --glow-color: var(--neon-orange); }
+        .woods-box { --glow-color: var(--neon-mint); }
+        .frogs-box { --glow-color: var(--cyber-lime); }
         .gecko-box { --glow-color: var(--terminal-green); }
         .red-panda-box { --glow-color: var(--punk-pink); }
 
@@ -276,7 +282,7 @@
     </div>
 
     <section>
-        <p>Welcome to the node. I'm a creative human operating at the intersection of analog lenses and digital synthesizers.</p>
+        <p>Welcome to the node. I'm a kind and open-minded person who works at the nexus of digital synthesizers and analog lenses. I'm passionate about coding and have a keen interest in all sciences.</p>
     
         <div class="stats">
             <div class="stat-box photography-box" data-reveal="photography" tabindex="0" role="button" aria-label="Show photography">
@@ -290,6 +296,18 @@
             <div class="stat-box gaming-box" data-reveal="gaming" tabindex="0" role="button" aria-label="Show gaming loadout">
                 <span class="interest-icon">🎮</span> GAMING
                 <br><small>Min-maxing reality.</small>
+            </div>
+            <div class="stat-box books-box" data-reveal="books" tabindex="0" role="button" aria-label="Show books">
+                <span class="interest-icon">📚</span> BOOKS
+                <br><small>Parallel universes.</small>
+            </div>
+            <div class="stat-box woods-box" data-reveal="woods" tabindex="0" role="button" aria-label="Show woods">
+                <span class="interest-icon">🌲</span> WOODS
+                <br><small>Offline mode.</small>
+            </div>
+            <div class="stat-box frogs-box" data-reveal="frogs" tabindex="0" role="button" aria-label="Show frog pixel art">
+                <span class="interest-icon">🐸</span> FROGS
+                <br><small>Ribbit.mp3</small>
             </div>
             <div class="stat-box gecko-box" data-reveal="gecko" tabindex="0" role="button" aria-label="Show gecko pixel art">
                 <span class="interest-icon">🦎</span> GECKOS
@@ -321,6 +339,18 @@
             </div>
             <figcaption class="pixel-title">GAME.EXE</figcaption>
         </figure>
+        <figure class="pixel-canvas" data-animal="books">
+            <img src="assets/library.avif" alt="A photography of a library" width="800" height="600" loading="lazy">
+            <figcaption class="pixel-title">BOOK.STORY</figcaption>
+        </figure>
+        <figure class="pixel-canvas" data-animal="woods">
+            <img src="assets/woods.avif" alt="A photography of woods" width="800" height="800" loading="lazy">
+            <figcaption class="pixel-title">WOODS.ENV</figcaption>
+        </figure>
+        <figure class="pixel-canvas" data-animal="frogs">
+            <img src="assets/frog.avif" alt="Pixel art of a frog" width="400" height="267" loading="lazy" class="pixel-art">
+            <figcaption class="pixel-title">FROG.OBJ</figcaption>
+        </figure>
         <figure class="pixel-canvas" data-animal="gecko">
             <img src="assets/phelsuma-pixel.avif" alt="Pixel art of a Phelsuma day gecko on a leaf" width="348" height="282" loading="lazy" class="pixel-art">
             <figcaption class="pixel-title">PHELSUMA.DAYGECKO</figcaption>
@@ -342,11 +372,11 @@
 
     <section class="legal-section" id="legal-section" tabindex="0" aria-expanded="false">
         <h3>[ LEGAL_NOTICE ]</h3>
-        <p class="legal-hint">Klicken zum Anzeigen des Impressums.</p>
+        <p class="legal-hint">Click to view the legal notice. | Klicken zum Anzeigen des Impressums.</p>
         <div class="legal-notice">
             <canvas id="legal-canvas" class="legal-canvas"></canvas>
         </div>
-        <noscript>Bitte JavaScript aktivieren, um das Impressum zu sehen.</noscript>
+        <noscript>Please enable JavaScript to view the legal notice. | Bitte JavaScript aktivieren, um das Impressum zu sehen.</noscript>
     </section>
 
     <section>
