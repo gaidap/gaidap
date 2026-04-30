@@ -10,6 +10,8 @@
             --terminal-green: #00ff41;
             --punk-pink: #ff0055;
             --electro-blue: #00f3ff;
+            --neon-yellow: #fff200;
+            --cyber-purple: #bc13fe;
             --text-color: #e0e0e0;
             --font-mono: 'Courier New', Courier, monospace;
         }
@@ -95,28 +97,29 @@
         }
 
         .stat-box {
-            border: 1px solid var(--electro-blue);
+            border: 1px solid var(--glow-color, var(--electro-blue));
             padding: 10px;
             transition: all 0.3s;
             cursor: pointer;
+            animation: pulse 2s infinite;
         }
 
         .stat-box:hover {
-            background: var(--electro-blue);
+            background: var(--glow-color, var(--electro-blue));
             color: black;
             transform: scale(1.05);
         }
 
-        /* Neon pulse for the red panda */
-        .red-panda-box {
-            border-color: var(--punk-pink);
-            animation: pulse 2s infinite;
-        }
+        .photography-box { --glow-color: var(--electro-blue); }
+        .music-box { --glow-color: var(--neon-yellow); }
+        .gaming-box { --glow-color: var(--cyber-purple); }
+        .gecko-box { --glow-color: var(--terminal-green); }
+        .red-panda-box { --glow-color: var(--punk-pink); }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 5px var(--punk-pink); }
-            50% { box-shadow: 0 0 15px var(--punk-pink); }
-            100% { box-shadow: 0 0 5px var(--punk-pink); }
+            0% { box-shadow: 0 0 5px var(--glow-color, var(--electro-blue)); }
+            50% { box-shadow: 0 0 15px var(--glow-color, var(--electro-blue)); }
+            100% { box-shadow: 0 0 5px var(--glow-color, var(--electro-blue)); }
         }
 
         .interest-icon {
@@ -175,8 +178,24 @@
             width: 100%;
             height: auto;
             border: 1px solid rgba(224, 224, 224, 0.35);
+        }
+
+        .pixel-art {
             image-rendering: pixelated;
             image-rendering: crisp-edges;
+        }
+
+        .pixel-placeholder {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            color: var(--terminal-green);
+            border: 1px solid rgba(224, 224, 224, 0.2);
+            text-align: center;
+            padding: 20px;
         }
 
         .pixel-title {
@@ -260,19 +279,19 @@
         <p>Welcome to the node. I'm a creative human operating at the intersection of analog lenses and digital synthesizers.</p>
     
         <div class="stats">
-            <div class="stat-box">
+            <div class="stat-box photography-box" data-reveal="photography" tabindex="0" role="button" aria-label="Show photography">
                 <span class="interest-icon">📷</span> PHOTOGRAPHY
                 <br><small>Capturing the grainy bits.</small>
             </div>
-            <div class="stat-box">
+            <div class="stat-box music-box" data-reveal="music" tabindex="0" role="button" aria-label="Show music archive">
                 <span class="interest-icon">🎸</span> PUNK / ELECTRO
                 <br><small>High-gain, low-latency.</small>
             </div>
-            <div class="stat-box">
+            <div class="stat-box gaming-box" data-reveal="gaming" tabindex="0" role="button" aria-label="Show gaming loadout">
                 <span class="interest-icon">🎮</span> GAMING
                 <br><small>Min-maxing reality.</small>
             </div>
-            <div class="stat-box" data-reveal="gecko" tabindex="0" role="button" aria-label="Show gecko pixel art">
+            <div class="stat-box gecko-box" data-reveal="gecko" tabindex="0" role="button" aria-label="Show gecko pixel art">
                 <span class="interest-icon">🦎</span> GECKOS
                 <br><small>Lizard brain enthusiast.</small>
             </div>
@@ -284,12 +303,30 @@
     </section>
 
     <div id="pixel-gallery" class="pixel-gallery" aria-live="polite">
+        <figure class="pixel-canvas" data-animal="photography">
+            <img src="assets/photography.avif" alt="A photography taken by me" width="800" height="600" loading="lazy">
+            <figcaption class="pixel-title">CAPTURED.MOMENT</figcaption>
+        </figure>
+        <figure class="pixel-canvas" data-animal="music">
+            <div class="pixel-placeholder">
+                <p>[ NO_AUDIO_UPLINK ]</p>
+                <p>STATUS: ENCRYPTED</p>
+            </div>
+            <figcaption class="pixel-title">SOUND.WAVEFORM</figcaption>
+        </figure>
+        <figure class="pixel-canvas" data-animal="gaming">
+            <div class="pixel-placeholder">
+                <p>[ SYSTEM_OFFLINE ]</p>
+                <p>REASON: GRINDING_XP</p>
+            </div>
+            <figcaption class="pixel-title">GAME.EXE</figcaption>
+        </figure>
         <figure class="pixel-canvas" data-animal="gecko">
-            <img src="assets/phelsuma-pixel.avif" alt="Pixel art of a Phelsuma day gecko on a leaf" width="348" height="282" loading="lazy">
+            <img src="assets/phelsuma-pixel.avif" alt="Pixel art of a Phelsuma day gecko on a leaf" width="348" height="282" loading="lazy" class="pixel-art">
             <figcaption class="pixel-title">PHELSUMA.DAYGECKO</figcaption>
         </figure>
         <figure class="pixel-canvas" data-animal="redpanda">
-            <img src="assets/redpanda-pixel.avif" alt="Pixel art of a little red panda in grass" width="372" height="270" loading="lazy">
+            <img src="assets/redpanda-pixel.avif" alt="Pixel art of a little red panda in grass" width="372" height="270" loading="lazy" class="pixel-art">
             <figcaption class="pixel-title">FIREFOX.REDPANDA</figcaption>
         </figure>
     </div>
